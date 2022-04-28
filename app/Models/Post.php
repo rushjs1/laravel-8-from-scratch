@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Comment;
 
 class Post extends Model
 {
@@ -45,10 +46,12 @@ class Post extends Model
               $query->where('username', $category)
           )
       );
-       
-
-
     } 
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     
     public function category()
     {

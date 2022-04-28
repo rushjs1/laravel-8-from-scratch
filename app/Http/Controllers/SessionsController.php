@@ -32,7 +32,9 @@ class SessionsController extends Controller
     ->withInput()
     ->withErrors([
         'email' => 'Your provided credentails could not be varified.'
-    ]); */
+    ]); */  
+    
+    
     if(! auth()->attempt($attributes))
     {
         throw ValidationException::withMessages([
