@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MailChimpController;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,9 @@ Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 
 //logout
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
+//Mailchimp
+Route::post('newsletter', MailChimpController::class);
 
 
 
