@@ -43,15 +43,15 @@ Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'
 Route::post('newsletter', NewsletterController::class);
 
 //admin stuff
-Route::get('admin/posts/create', [AdminController::class, 'create'])->middleware('adminsOnly');
-Route::post('admin/posts', [AdminController::class, 'store'])->middleware('adminsOnly');
-Route::get('admin/posts', [AdminController::class, 'index'])->middleware('adminsOnly');
-Route::get('admin/dashboard', [AdminController::class, 'show'])->middleware('adminsOnly');
-Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit'])->middleware('adminsOnly');
-Route::patch('admin/posts/{post}', [AdminController::class, 'update'])->middleware('adminsOnly');
-Route::delete('admin/posts/{post}', [AdminController::class, 'destroy'])->middleware('adminsOnly');
-
-
+Route::middleware('can:admin')->group(function () {
+    Route::get('admin/posts/create', [AdminController::class, 'create']);
+    Route::get('admin/posts', [AdminController::class, 'index']);
+    Route::get('admin/dashboard', [AdminController::class, 'show']);
+    Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit']);
+    Route::post('admin/posts', [AdminController::class, 'store']);
+    Route::patch('admin/posts/{post}', [AdminController::class, 'update']);
+    Route::delete('admin/posts/{post}', [AdminController::class, 'destroy']);
+});
 
 
 //Route::get('category/{category:slug}', function(Category $category){

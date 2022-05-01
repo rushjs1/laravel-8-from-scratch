@@ -26,9 +26,14 @@
                     <x-slot name="trigger">
                     <button class="text-xs font-bold uppercase p-2 rounded-lg hover:bg-gray-200" @click="show = !show">Welcome, {{ auth()->user()->name }}</button>
                     </x-slot>
+
+                    @admin
                     <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')" >New Post</x-dropdown-items>
                     <x-dropdown-item href="/admin/dashboard" :active="request()->is('admin/dashboard')"> Dashboard </x-dropdown-items>
-                    <x-dropdown-item x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()"  href="#" > Log Out </x-dropdown-items>
+                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')"> All Posts </x-dropdown-items>
+                    @endadmin
+                    
+                    <x-dropdown-item x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()" class="hover:text-red-500"  href="#" > Log Out </x-dropdown-items>
                     <form id="logout-form" method="POST" action="/logout" class="hidden">
                     @csrf
                     <button type="submit">Log Out</button>
