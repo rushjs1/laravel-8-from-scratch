@@ -6,7 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\MailChimpController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\AdminController;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use Illuminate\Support\Facades\Route;
 
@@ -38,8 +39,18 @@ Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
 //logout
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 
-//Mailchimp
-Route::post('newsletter', MailChimpController::class);
+//newsletter
+Route::post('newsletter', NewsletterController::class);
+
+//admin stuff
+Route::get('admin/posts/create', [AdminController::class, 'create'])->middleware('adminsOnly');
+Route::post('admin/posts', [AdminController::class, 'store'])->middleware('adminsOnly');
+Route::get('admin/posts', [AdminController::class, 'index'])->middleware('adminsOnly');
+Route::get('admin/dashboard', [AdminController::class, 'show'])->middleware('adminsOnly');
+Route::get('admin/posts/{post}/edit', [AdminController::class, 'edit'])->middleware('adminsOnly');
+Route::patch('admin/posts/{post}', [AdminController::class, 'update'])->middleware('adminsOnly');
+Route::delete('admin/posts/{post}', [AdminController::class, 'destroy'])->middleware('adminsOnly');
+
 
 
 

@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 use \Exception;
 
 
-class MailChimpController extends Controller {
+class NewsletterController extends Controller {
     
     //use Automatic resolution for newsletter
     public function __invoke(Request $req, Newsletter $newsletter)
